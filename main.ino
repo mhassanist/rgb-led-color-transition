@@ -1,8 +1,47 @@
+// Two color transition using linear interpolation 
 
-/*
-    ARDUINO RGB LED TUTORIAL: RAINBOW COLOR
-    By: TheGeekPub.com
-    More Arduino Tutorials: https://www.thegeekpub.com/arduino-tutorials/
+
+int redPin = 25;
+int greenPin = 26;
+int bluePin = 27;
+
+void setup() {
+  pinMode(redPin, OUTPUT);    // sets the red pin as output
+  pinMode(greenPin, OUTPUT);  // sets the green pin as output
+  pinMode(bluePin, OUTPUT);   // sets the blue pin as output
+
+  setColourRgb(255, 255, 255);
+}
+
+unsigned int startColor[] = {255, 0, 0};
+unsigned int endColor[] = {0, 255, 00};
+
+unsigned int color[] = {0, 0, 0};
+
+void loop() {
+for (float t = 0; t < 1.0; t += 0.01) {
+    color[0] = (int) (startColor[0] + ((endColor[0] - startColor[0]) * t));
+    color[1] = (int) (startColor[1] + ((endColor[1] - startColor[1]) * t));
+    color[2] = (int) (startColor[2] + ((endColor[2] - startColor[2]) * t));
+
+    setColourRgb(color[0], color[1], color[2]);
+    delay(100);
+  }
+  delay(1000);
+
+}
+
+int convertCathodeToAnode(int cathodeValue) {
+    return 255 - cathodeValue;
+}
+
+void setColourRgb(unsigned int red, unsigned int green, unsigned int blue) {
+  analogWrite(redPin, convertCathodeToAnode(red));
+  analogWrite(greenPin, convertCathodeToAnode(green));
+  analogWrite(bluePin, convertCathodeToAnode(blue));
+}
+
+
 
 // /*
 //     ARDUINO RGB LED TUTORIAL: RAINBOW COLOR
@@ -67,85 +106,3 @@
 //   analogWrite(PIN_BLUE, convertCathodeToAnode(blue));
 // }
 
-
-int redPin = 25;
-int greenPin = 26;
-int bluePin = 27;
-
-void setup() {
-  pinMode(redPin, OUTPUT);    // sets the red pin as output
-  pinMode(greenPin, OUTPUT);  // sets the green pin as output
-  pinMode(bluePin, OUTPUT);   // sets the blue pin as output
-
-  setColourRgb(255, 255, 255);
-}
-
-unsigned int startColor[] = {255, 0, 0};
-unsigned int endColor[] = {0, 255, 00};
-
-unsigned int color[] = {0, 0, 0};
-
-void loop() {
-for (float t = 0; t < 1.0; t += 0.01) {
-    color[0] = (int) (startColor[0] + ((endColor[0] - startColor[0]) * t));
-    color[1] = (int) (startColor[1] + ((endColor[1] - startColor[1]) * t));
-    color[2] = (int) (startColor[2] + ((endColor[2] - startColor[2]) * t));
-
-    setColourRgb(color[0], color[1], color[2]);
-    delay(100);
-  }
-  delay(1000);
-
-}
-
-int convertCathodeToAnode(int cathodeValue) {
-    return 255 - cathodeValue;
-}
-
-void setColourRgb(unsigned int red, unsigned int green, unsigned int blue) {
-  analogWrite(redPin, convertCathodeToAnode(red));
-  analogWrite(greenPin, convertCathodeToAnode(green));
-  analogWrite(bluePin, convertCathodeToAnode(blue));
-}
-
-
-// int redPin = 25;
-// int greenPin = 26;
-// int bluePin = 27;
-
-// void setup() {
-//   pinMode(redPin, OUTPUT);    // sets the red pin as output
-//   pinMode(greenPin, OUTPUT);  // sets the green pin as output
-//   pinMode(bluePin, OUTPUT);   // sets the blue pin as output
-
-//   setColourRgb(255, 255, 255);
-// }
-
-// unsigned int startColor[] = {255, 0, 0};
-// unsigned int endColor[] = {0, 255, 00};
-
-// unsigned int color[] = {0, 0, 0};
-
-// void loop() {
-// for (float t = 0; t < 1.0; t += 0.01) {
-//     color[0] = (int) (startColor[0] + ((endColor[0] - startColor[0]) * t));
-//     color[1] = (int) (startColor[1] + ((endColor[1] - startColor[1]) * t));
-//     color[2] = (int) (startColor[2] + ((endColor[2] - startColor[2]) * t));
-
-//     setColourRgb(color[0], color[1], color[2]);
-//     delay(100);
-//   }
-//   print(color)
-//   delay(1000);
-
-// }
-
-int convertCathodeToAnode(int cathodeValue) {
-    return 255 - cathodeValue;
-}
-
-// void setColourRgb(unsigned int red, unsigned int green, unsigned int blue) {
-//   analogWrite(redPin, convertCathodeToAnode(red));
-//   analogWrite(greenPin, convertCathodeToAnode(green));
-//   analogWrite(bluePin, convertCathodeToAnode(blue));
-// }
