@@ -1,6 +1,4 @@
 // Two color transition using linear interpolation 
-
-
 int redPin = 25;
 int greenPin = 26;
 int bluePin = 27;
